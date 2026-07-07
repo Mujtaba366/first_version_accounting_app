@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get(
         'DJANGO_ALLOWED_HOSTS',
-        'localhost,127.0.0.1,::1,testserver',
+        'localhost,127.0.0.1,::1,testserver,first-version-accounting-app-api.onrender.com',
     ).split(',')
     if host.strip()
 ]
@@ -76,6 +76,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://reimagined-carnival-g44xpp7jjr9vfvv96-5173.app.github.dev",
     "https://first-version-accounting-app.onrender.com",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
 
