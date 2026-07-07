@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './index.css'
 import AuthScreen from './screens/AuthScreen';
 import Main from './screens/nav';
+import { request } from './screens/lib/api';
 
 function App() {
   const [isAuthed, setIsAuthed] = useState(false);
@@ -12,15 +13,9 @@ function App() {
 
     const loadSession = async () => {
       try {
-        const response = await fetch('/api/auth/session', {
-          credentials: 'include',
+        const payload = await request<{ authenticated?: boolean }>('/api/auth/session', {
+          method: 'GET',
         });
-
-        if (!response.ok) {
-          throw new Error('Session check failed');
-        }
-
-        const payload = await response.json() as { authenticated?: boolean };
 
         if (active) {
           setIsAuthed(Boolean(payload.authenticated));

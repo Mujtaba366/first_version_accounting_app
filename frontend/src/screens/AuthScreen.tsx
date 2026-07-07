@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // import { useAuth } from '../lib/auth';
 import { BookOpen, Loader2 } from 'lucide-react';
+import { request } from './lib/api';
 
 type AuthMode = 'signin' | 'signup';
 
@@ -16,25 +17,13 @@ type AuthErrorResponse = {
 async function callAuthEndpoint(mode: AuthMode, gmail: string, password: string) {
   const endpoint = mode === 'signup' ? '/api/auth/signup' : '/api/auth/login';
 
-  const response = await fetch(endpoint, {
+  const payload = await request<AuthSuccessResponse & AuthErrorResponse>(endpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-      credentials: 'include',
     body: JSON.stringify({ gmail, password }),
   });
-
-  let payload: AuthSuccessResponse & AuthErrorResponse = {};
-  try {
-    payload = (await response.json()) as AuthSuccessResponse & AuthErrorResponse;
-  } catch {
-    payload = {};
-  }
-
-  if (!response.ok) {
-    throw new Error(payload.error || 'Request failed');
-  }
 
   if (mode === 'signup' && payload.signup !== 'ok') {
     throw new Error('Signup failed');

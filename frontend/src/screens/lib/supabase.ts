@@ -1,3 +1,5 @@
+import { request } from './api';
+
 export type AccountType = 'asset' | 'liability' | 'equity' | 'income' | 'expense';
 export type EntrySide = 'debit' | 'credit';
 
@@ -25,38 +27,6 @@ export interface Transaction {
   memo: string;
   created_at?: string;
   entries?: Entry[];
-}
-
-const JSON_HEADERS = {
-  'Content-Type': 'application/json',
-};
-
-async function request<T>(url: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(url, {
-    credentials: 'include',
-    ...init,
-    headers: {
-      ...JSON_HEADERS,
-      ...(init?.headers || {}),
-    },
-  });
-
-  let payload: unknown = null;
-  try {
-    payload = await response.json();
-  } catch {
-    payload = null;
-  }
-
-  if (!response.ok) {
-    const message =
-      typeof payload === 'object' && payload !== null && 'error' in payload
-        ? String((payload as { error?: string }).error || 'Request failed')
-        : 'Request failed';
-    throw new Error(message);
-  }
-
-  return payload as T;
 }
 
 export const ACCOUNT_TYPES: { value: AccountType; label: string; normal: EntrySide }[] = [
