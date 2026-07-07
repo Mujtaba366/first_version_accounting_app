@@ -74,6 +74,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://reimagined-carnival-g44xpp7jjr9vfvv96-5173.app.github.dev",
+    "https://first-version-accounting-app.onrender.com",
 ]
 
 ROOT_URLCONF = 'config.urls'
