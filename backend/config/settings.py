@@ -151,7 +151,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Supabase settings Mapplem1234first
-SUPABASE_URL = "https://yficgyaquuzwgljetubz.supabase.co"
-SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmaWNneWFxdXV6d2dsamV0dWJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzOTYwMDcsImV4cCI6MjA5ODk3MjAwN30.abvbYl5EUlAVuGpWHO5Se1avnq1xDH-11WbBzfcLk44"
-SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmaWNneWFxdXV6d2dsamV0dWJ6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MzM5NjAwNywiZXhwIjoyMDk4OTcyMDA3fQ.b_p_cVOPTVfro5YjRkvVRxP7-p6cae_DjKwp3h_Odk8"
-SUPABASE_TEST_TABLE = "test_table"
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
+SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+SUPABASE_TEST_TABLE = os.environ.get("SUPABASE_TEST_TABLE", "test_table")
