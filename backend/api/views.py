@@ -52,11 +52,11 @@ def _parse_auth_payload(request):
     except (json.JSONDecodeError, UnicodeDecodeError):
         return None, JsonResponse({"error": "invalid json body"}, status=400)
 
-    gmail = payload.get("gmail")
+    gmail = payload.get("gmail") or payload.get("email")
     password = payload.get("password")
 
     if not gmail or not isinstance(gmail, str):
-        return None, JsonResponse({"error": "gmail is required"}, status=400)
+        return None, JsonResponse({"error": "gmail or email is required"}, status=400)
     if not password or not isinstance(password, str):
         return None, JsonResponse({"error": "password is required"}, status=400)
 
